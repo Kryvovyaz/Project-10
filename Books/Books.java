@@ -7,13 +7,7 @@ import java.util.Random;
 public abstract class Books {
     private   String name;
 
-    public Categories getCategories() {
-        return categories;
-    }
 
-    public void setCategories(Categories categories) {
-        this.categories = categories;
-    }
 
     public int getAmmount() {
         return ammount;
@@ -27,7 +21,7 @@ public abstract class Books {
     private  String author;
     private  int ammount;
     private  boolean pastdue;
-    private Categories categories;
+
 
     public  int getbookID() {
         return bookID;

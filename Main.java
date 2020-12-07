@@ -16,7 +16,7 @@ public class Main extends LibraryDATA {
     public static void printLibrarianmenu() {
         System.out.println("Enter" + "\n" + "|1: To see Library's inventory| " + "2:  To see active Users| " +
                 "|3: to look up a user| " + "\n" + "|4: To add new user | " + "5: To add new book| " +
-                "6: To Check in a book| " + "7: To check a out book|" + "\n" + "|C to Main Menu");
+                "6: To Check in a book| " + "7: To check out a book|" + "\n" + "|C to Main Menu");
 
     }
 
@@ -40,7 +40,7 @@ public class Main extends LibraryDATA {
             System.out.println("Please identify your self:| 1:Librerian | 2:Teacher | 3:Student");
             Scanner scanner = new Scanner(System.in);
             String answer = scanner.nextLine();
-            //Admin
+//Admin
             if (answer.equals("1")) {
 
                 adminaccess(scanner);
@@ -59,15 +59,26 @@ public class Main extends LibraryDATA {
 
 
     /***********************************************************************************/
-
+    static  int id2;
     /////////////////////  Users Access   ///////////////////////////////////////////
     private static void Usersaccess(Scanner scanner) {
-        System.out.println("Enter your IDNumber");
-        int id2 = Integer.parseInt(scanner.nextLine());
-        if(!LibraryDATA.getUsersID().containsKey(id2)){
-            System.out.println("Not registered User");
-        }else
-        System.out.println("What do you want to do " + LibraryDATA.getUsersID().get(id2).getUser_name() + " ?");
+
+        boolean access = false;
+        while (!access) {
+            System.out.println("Enter your IDNumber");
+             id2 = Integer.parseInt(scanner.nextLine());
+
+            if (LibraryDATA.getUsersID().containsKey(id2)) {
+                if (!(LibraryDATA.getUsersID().get(id2) instanceof Librarian)) {
+                    access=true;
+                    System.out.println("What do you want to do " + LibraryDATA.getUsersID().get(id2).getUser_name() + " ?");
+
+                }else   System.out.println("You have no access");
+            } else {
+
+                System.out.println("You have no access");
+            }
+        };
         String answer2;
         do {
             printUsersmenu();
@@ -96,13 +107,24 @@ public class Main extends LibraryDATA {
 
     ///////////////////////// Admin Accsess  ///////////////////////////////////
     private static void adminaccess(Scanner scanner) {
-        System.out.println("Enter your IDNumber");
-        int id = Integer.parseInt(scanner.nextLine());
-        if(!LibraryDATA.getUsersID().containsKey(id)){
-            System.out.println("Not registered User");
-        }else
-        System.out.println("What do you want to do " + LibraryDATA.getUsersID().get(id).getUser_name() + " ?");
-        String answer1;
+
+        boolean access = false;
+        while (!access) {
+            System.out.println("Enter your IDNumber");
+            int id = Integer.parseInt(scanner.nextLine());
+
+            if (LibraryDATA.getUsersID().containsKey(id)) {
+                if (LibraryDATA.getUsersID().get(id) instanceof Librarian) {
+                    access=true;
+                    System.out.println("What do you want to do " + LibraryDATA.getUsersID().get(id).getUser_name() + " ?");
+
+            }   System.out.println("You have no access");
+            } else {
+
+                System.out.println("You have no access");
+            }
+        };
+            String answer1;
         do {
             printLibrarianmenu();
             answer1 = scanner.nextLine();
