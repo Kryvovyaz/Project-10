@@ -63,29 +63,35 @@ public class Librarian extends Users {
     public static void createBook() throws RuntimeException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("What type of book do you have: 1-Fiction Books 2-Non-Fiction Books 3- Reference Books");
-        //TODO:loop or trycatch
+
         String type = scanner.nextLine();
+
+
         ///////////////////////////////
         System.out.println("Enter Book's name");
         String name = scanner.nextLine();
         System.out.println("Enter Author");
         String author = scanner.nextLine();
+        System.out.println("Enter ammount of books");
+        int amount=0;
+       try {
+            amount = Integer.parseInt(scanner.nextLine());
+       }catch (NumberFormatException ignored){}
+
         switch (type) {
             case "1":
-                Fiction_Books fiction_books = new Fiction_Books(name, author);
+                Fiction_Books fiction_books = new Fiction_Books(name, author,amount);
                 LibraryDATA.addBook(fiction_books);
                 break;
             case "2":
-                Non_Fiction_Books non_fiction_books = new Non_Fiction_Books(name, author);
+                Non_Fiction_Books non_fiction_books = new Non_Fiction_Books(name, author,amount);
                 LibraryDATA.addBook(non_fiction_books);
                 break;
             case "3":
-                Reference_Books reference_books = new Reference_Books(name, author);
+                Reference_Books reference_books = new Reference_Books(name, author,amount);
                 LibraryDATA.addBook(reference_books);
                 break;
-            default:
-                throw new RuntimeException("You have to enter 1 or 2 or 3 only");
-        }
+                    }
 
     }
 /***********************************************************************************************************************/

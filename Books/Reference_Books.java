@@ -1,12 +1,14 @@
 package Project10_Vlad.Books;
 
 public class Reference_Books extends Books {
-    public Reference_Books(String name, String author) {
-        super(name, author);
-        setBookID(bookIdGenerator()+80000);}
 
-    public Reference_Books(String name, int bookID, String author) {
-        super(name, bookID, author);
+    public Reference_Books(String name, String author,int amount) {
+        super(name, author,amount);
+        setBookID(bookIdGenerator()+80000);
+    }
+
+    public Reference_Books(String name, int bookID, String author, int ammount) {
+        super(name, bookID, author, ammount);
     }
 }
 

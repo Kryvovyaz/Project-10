@@ -2,12 +2,16 @@ package Project10_Vlad.Books;
 
 import Project10_Vlad.LibraryDATA;
 
+import java.time.LocalDate;
 import java.util.Random;
 
-public abstract class Books {
+public abstract class Books  {
     private   String name;
-
-
+    private   Integer bookID;
+    private  String author;
+    private  int ammount;
+    private LocalDate pastdue;
+    private Categories categories;
 
     public int getAmmount() {
         return ammount;
@@ -16,12 +20,6 @@ public abstract class Books {
     public void setAmmount(int ammount) {
         this.ammount = ammount;
     }
-
-    private   int bookID;
-    private  String author;
-    private  int ammount;
-    private  boolean pastdue;
-
 
     public  int getbookID() {
         return bookID;
@@ -35,22 +33,16 @@ public abstract class Books {
         this.bookID = bookID;
     }
 
-    public  void setAuthor(String author) {
-        this.author = author;
-    }
-
-
-
-    public  void setPastdue(boolean pastdue) {
-        this.pastdue = pastdue;
-    }
-
     public  String getAuthor() {
         return author;
     }
 
-    public  boolean isPastdue() {
+    public LocalDate getPastdue() {
         return pastdue;
+    }
+
+    public void setPastdue(LocalDate pastdue) {
+        this.pastdue = pastdue;
     }
 
     public  String getName() {
@@ -60,33 +52,23 @@ public abstract class Books {
         return bookID;
     }
 
-    public Books(String name, String author) {
+    public Books(String name, String author,int ammount) {
         this.name = name;
         this.author = author;
         this.bookID = bookIdGenerator();
-        this.ammount = 10;
-        this.pastdue = false;
-
+        this.ammount = ammount;
+        this.categories=categories;
     }
 
-
-
-    public  String  getStatus() {
-        String s ="";
-        if(!this.pastdue){
-          s= "Active" ;}
-        else s= "Past Due";
-        return s;
-    }
-
-    public Books(String name, int bookID, String author) {
+    public Books(String name, int bookID, String author,int ammount) {
         this.name = name;
         this.bookID = bookID;
         this.author = author;
-        this.ammount = 10;
-        this.pastdue = false;
+        this.ammount = ammount;
+       // this.categories=categories;
+        this.ammount=ammount;
     }
-
+//////////////////////  Book ID Genrator ///////////////////////////////
     public  int bookIdGenerator() {
         int id=0;
         Random random = new Random();
@@ -95,12 +77,16 @@ public abstract class Books {
             break; }
         return  id;
     }
+////////////////////////////////////////////////////////////////////////
 
 
+    public Categories getCategories() {
+        return categories;
+    }
 
-   @Override
+    @Override
     public String toString(){
-        String s="BookID: "+getBookID()+" BookName: "+getName();
+        String s="BookID: "+getBookID()+" BookName: "+getName()+" Author "+getAuthor()+" Amount: "+ getAmmount();
        return s;
    }
 

@@ -3,16 +3,18 @@ package Project10_Vlad.Books;
 public class Fiction_Books extends Books {
 
 private Categories categories;
-    public Fiction_Books(String name, String author) {
-        super(name, author);
-        setBookID(bookIdGenerator()) ;
+
+    public Fiction_Books(String name, String author,int ammount) {
+        super(name, author,ammount);
+        setBookID(bookIdGenerator());
     }
 
-    public Fiction_Books(String name, int bookID, String author) {
-        super(name, bookID, author);
+    public Fiction_Books(String name, int bookID, String author, int ammount) {
+        super(name, bookID, author, ammount);
     }
 
-enum Categories{
+
+    enum Categories{
     WORLD_CLASSICS, NOVELS, LITERATURE, EARLY_AGE, GENERAL
 
 
