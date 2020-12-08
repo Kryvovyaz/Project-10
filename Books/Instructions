@@ -1,0 +1,10 @@
+To run a program go to App class;
+Admin has full access to the library.
+Admin can:
+-See Library's inventory.
+-Add new books to the library.
+-Add new users to the Library.
+-Check-in and Check-out books.
+-Search for a user and see his inventory.
+
+Students and Teachers have limited access.

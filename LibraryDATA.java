@@ -75,7 +75,7 @@ public class LibraryDATA {
     }
 
     /////////////////////////////////   CHEKOUT A BOOK  //////////////////////////////
-
+//TODO FIX check out to null userID
    public static void CheckOut(int UserId,int BookID) {
        if (!inventory.entrySet().isEmpty()) {
            if(!((usersID.get(usersID) instanceof Teacher)&&(usersInventory.get(usersID).size()<=5))||((usersID.get(usersID) instanceof Student)&&(usersInventory.get(usersID).size()<=3))||((usersID.get(usersID) instanceof Librarian)&&(usersInventory.get(usersID).size()<=10))){
@@ -139,6 +139,116 @@ public class LibraryDATA {
     }
 
     /***********************************************************************************/
+    ////////////////    Librarian Menu    /////////////////////////////////////////////
+    public static void printLibrarianmenu() {
+        System.out.println("Enter" + "\n" + "|1: To see Library's inventory| " + "2:  To see active Users| " +
+                "|3: to look up a user| " + "\n" + "|4: To add new user | " + "5: To add new book| " +
+                "6: To Check in a book| " + "7: To check out a book|" + "\n" + "|C to Main Menu");
+
+    }
+
+    /*************************************************************************************/
+
+/////////////////////  Users Menu    /////////////////////////////////////////////////
+    public static void printUsersmenu() {
+
+        System.out.println("Enter" + "\n" + "| 1: To see Library's inventory | " +
+                "| 2: To see your inventory | " + "|3: To Check-in a book | " + "|4: To Check-out a book |" + "\n" + "C to Main Menu");
+    }
+
+    /*************************************************************************************************/
+
+    //////////////////////////    Acces Menu   ///////////////////////////////////
+    public static void START() {
+        do {
+            System.out.println("Welcome to Vlad's  Library");
+            System.out.println("Please identify your self:| 1:Librerian | 2:Teacher | 3:Student");
+            Scanner scanner = new Scanner(System.in);
+            String answer = scanner.nextLine();
+
+            try{
+                //Admin
+                if (answer.equals("1")) {
+                    adminaccess(scanner);
+                    //Teacher and Student
+                } else {
+                    Usersaccess(scanner);
+                } }catch (NumberFormatException ignored){
+            }
+
+        } while (1 != 2);
+    }
+    /***********************************************************************************/
+
+    static  int id2;
+    /////////////////////  Users Access   ///////////////////////////////////////////
+    private static void Usersaccess(Scanner scanner) {
+
+        boolean access = false;
+        while (!access) {
+            System.out.println("Enter your IDNumber");
+            id2 = Integer.parseInt(scanner.nextLine());
+
+            if (LibraryDATA.getUsersID().containsKey(id2)) {
+                access=true;
+                System.out.println("What do you want to do " + LibraryDATA.getUsersID().get(id2).getUser_name() + " ?");
+
+            } else {System.out.println("You have no access");}
+        };
+        String answer2;
+        try{
+            do {
+                printUsersmenu();
+                answer2 = scanner.nextLine();
+                switch (answer2) {
+                    case "1":System.out.println(LibraryDATA.printinventory());break;
+                    case "2":LibraryDATA.UserLookUP(id2);break;
+                    case "3":Librarian.createBook();break;
+                    case "4":System.out.println("Enter BookID");
+                        LibraryDATA.CheckOut(id2, Integer.parseInt(scanner.nextLine()));break;
+                    case "C":}
+            } while (!answer2.equals("C"));
+        }catch (NumberFormatException ignored){}
+    }
+    /******************************************************************************************/
+
+    ///////////////////////// Admin Accsess  ///////////////////////////////////
+    private static void adminaccess(Scanner scanner) {
+
+        boolean access = false;
+        while (!access) {
+            System.out.println("Enter your IDNumber");
+            int id = Integer.parseInt(scanner.nextLine());
+
+            if (LibraryDATA.getUsersID().containsKey(id)) {
+                if (LibraryDATA.getUsersID().get(id) instanceof Librarian) {
+                    //access=true;
+                    System.out.println("What do you want to do " + LibraryDATA.getUsersID().get(id).getUser_name() + " ?");
+                    break;
+                }   System.out.println("You are not an admin");
+            } else { System.out.println("You have not registered");}
+        };
+        String answer1;
+        try{
+            do {
+                printLibrarianmenu();
+                answer1 = scanner.nextLine();
+                switch (answer1) {
+
+                    case "1": System.out.println(LibraryDATA.printinventory());break;
+                    case "3": System.out.println("Enter UserID");LibraryDATA.UserLookUP(Integer.parseInt(scanner.nextLine()));break;
+                    case "2": System.out.println(LibraryDATA.printUsers());break;
+                    case "4": Librarian.createNewUser(); break;
+                    case "5": Librarian.createBook();System.out.println("New book stored"); break;
+                    case "6": Librarian.createBook();System.out.println("Book successfuly returned"); break;
+                    case "7": System.out.println("Please enter UserID");
+                        int answer3 = Integer.parseInt(scanner.nextLine());
+                        System.out.println("Please enter BookID");
+                        int answer4 = Integer.parseInt(scanner.nextLine());
+                        LibraryDATA.CheckOut(answer3, answer4);break;
+                    case "C":     }
+            } while (!answer1.equals("C")); }catch (NumberFormatException ignored){}
+    }
     public static void main(String[] args) {
 
         System.out.println(printinventory());
