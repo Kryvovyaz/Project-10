@@ -433,6 +433,7 @@ int id2=0;
        System.out.println("User's last name");
        String lastname = scanner.nextLine();
 
+
        switch (user) {
            case 1:
                Librarian librarian = new Librarian(name, lastname);
@@ -465,15 +466,27 @@ public static void createBook() {
             System.out.println("You can only select 1,  2 or 3 ");
         }
     }while (!(type ==1||type==2||type==3));
-
-
+String name="";
+do {
     System.out.println("Enter Book's name");
-    String name = scanner.nextLine();
-    System.out.println("Enter Author");
-    String author = scanner.nextLine();
-    System.out.println("Enter ammount of books");
 
-           int amount = Integer.parseInt(scanner.nextLine());
+    name = scanner.nextLine();
+} while(name.length()==0);
+   String author="";
+   do {
+       System.out.println("Enter Author");
+       author = scanner.nextLine();
+   }while (author.length()==0);
+    System.out.println("Enter ammount of books");
+    int amount=0;
+    do{
+        try{
+            amount= Integer.parseInt(scanner.nextLine());
+        break;}
+        catch (NumberFormatException ignored) {
+            System.out.println("You can only select 1,  2 or 3 ");
+        }
+    }while (1>0);
 
     switch (type) {
         case 1:
@@ -514,6 +527,18 @@ public static void createBook() {
 
         return dueDate;
     }
+
+//////////////////////////////  Serch by categoties ////////////////////////////
+    public static HashMap<Integer,Categories> CategoriesSearch(){
+        HashMap<Integer,Categories>map = new HashMap<>();
+
+
+
+
+        return map;
+    }
+
+
    /****************************************************************************************/
     public static void main(String[] args)  {
 
