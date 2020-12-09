@@ -65,20 +65,24 @@ public class LibraryDATA {
     public static void UserLookUP(int userID) {
         if (userStatus(userID)) {
             if (usersInventory.get(userID) != null) {
-
-                Collection<Books> list=usersInventory.get(userID).values();
-                for (Books books : list) {
-                    System.out.println("| BookID: "+books.getBookID()+" | Book Name: "+books.getName()+" | Author: "+books.getAuthor()+" | DueDate: "+"\n");
-                                    }
+                if (!usersInventory.get(userID).isEmpty()) {
 
 
+                    Collection<Books> list = usersInventory.get(userID).values();
+                    for (Books books : list) {
+                        System.out.println("| BookID: " + books.getBookID() + " | Book Name: " + books.getName() + " | Author: " + books.getAuthor() + " | DueDate: " + "\n");
+                    }
+
+
+                } else {
+                    System.out.println("NO books has been borrowed by this user");
+                }
             } else {
-                System.out.println("NO books has been borrowed by this user");
+                System.out.println("Not registered user");
             }
+
         }
-
     }
-
     //manual input for test
         public static void addBook(Books book) {
         inventory.put(book.getBookID(), book);
@@ -209,9 +213,10 @@ int id2=0;
                         CheckOut(id2);
                         break;
                     case "c":
+                    default:break;
                 }
             } while (!answer2.equals("c"));
-        } catch (NumberFormatException | CloneNotSupportedException ignored) {
+        } catch (NumberFormatException  ignored) {
         }
     }
 
@@ -286,7 +291,7 @@ int id2=0;
                     case "c":break;
                 }
             } while (!answer1.equals("c"));
-        } catch (NumberFormatException | CloneNotSupportedException ignored) {
+        } catch (NumberFormatException ignored) {
         }
 
     }
@@ -339,7 +344,7 @@ int id2=0;
     /******************************************************************************************/
 
     /////////////////////////////////   CHEKOUT A BOOK  //////////////////////////////
-    public static void CheckOut(int UserId) throws CloneNotSupportedException {
+    public static void CheckOut(int UserId)  {
         Scanner scanner = new Scanner(System.in);
         boolean q = true;
         do {
@@ -464,10 +469,16 @@ public static void createBook() throws RuntimeException {
 }
     /***********************************************************************************************************************/
 
-    public static void main(String[] args) throws CloneNotSupportedException {
-checkinBook();
-//        CheckOut(3001);
-//        UserLookUP(3001);
+    public static void main(String[] args)  {
+
+
+        CheckOut(3001);
+
+        UserLookUP(3001);
+
+        checkinBook();
+
+        UserLookUP(3001);
 //        CheckOut(3001);
 //        UserLookUP(3001);
 //        CheckOut(3001);
