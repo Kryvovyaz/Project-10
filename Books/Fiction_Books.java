@@ -4,26 +4,16 @@ public class Fiction_Books extends Books {
 
 private Categories categories;
 
-    public Fiction_Books(String name, String author,int ammount) {
-        super(name, author,ammount);
-        setBookID(bookIdGenerator());
+    public Fiction_Books(String name, String author, int amount, Categories categories) {
+        super(name, author, amount, categories);
     }
 
-    public Fiction_Books(String name, int bookID, String author, int ammount) {
-        super(name, bookID, author, ammount);
+    public Fiction_Books(String name, int bookID, String author, int amount, Categories categories) {
+        super(name, bookID, author, amount, categories);
     }
 
 
-
-
-
-
-    enum Categories{
-    WORLD_CLASSICS, NOVELS, LITERATURE, EARLY_AGE, GENERAL
-
-
-}
-}
+   }
 /*Fiction Books:
       Fiction Book ids start with 1 (For example: 15087)
       Fiction books must have one of the five categories: WORLD_CLASSICS, NOVELS, LITERATURE, EARLY_AGE or GENERAL

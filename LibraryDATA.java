@@ -1,9 +1,6 @@
 package Project10_Vlad;
 
-import Project10_Vlad.Books.Books;
-import Project10_Vlad.Books.Fiction_Books;
-import Project10_Vlad.Books.Non_Fiction_Books;
-import Project10_Vlad.Books.Reference_Books;
+import Project10_Vlad.Books.*;
 import Project10_Vlad.Users.Librarian;
 import Project10_Vlad.Users.Student;
 import Project10_Vlad.Users.Teacher;
@@ -43,24 +40,24 @@ public class LibraryDATA {
         addUser(new Student("Turkana", "Mammadova", 3003));
 
 
-        addBook(new Fiction_Books("War and Peace", 10001, "Tolstoy", 1));
-        addBook(new Fiction_Books("Idiot", 10002, "Dostoyevskiy", 6));
-        addBook(new Fiction_Books("Master and Margarita", 10003, "Bulgakov", 2));
-        addBook(new Fiction_Books("Yevgeny Onegin", 10004, "Pushkin", 0));
-        addBook(new Fiction_Books("Romeo and Julietta", 10005, "Shekspir", 12));
-        addBook(new Fiction_Books("Monte Kristo", 10006, "Dyuma", 4));
-        addBook(new Fiction_Books("Ayvengo", 10007, "Sccott", 3));
+        addBook(new Fiction_Books("War and Peace", 10001, "Tolstoy", 1, Categories.NOVELS));
+        addBook(new Fiction_Books("Idiot", 10002, "Dostoyevskiy", 6,Categories.NOVELS));
+        addBook(new Fiction_Books("Master and Margarita", 10003, "Bulgakov", 2,Categories.LITERATURE));
+        addBook(new Fiction_Books("Yevgeny Onegin", 10004, "Pushkin", 0,Categories.LITERATURE));
+        addBook(new Fiction_Books("Romeo and Julietta", 10005, "Shekspir", 12,Categories.NOVELS));
+        addBook(new Fiction_Books("Monte Kristo", 10006, "Dyuma", 4,Categories.NOVELS));
+        addBook(new Fiction_Books("Ayvengo", 10007, "Sccott", 3,Categories.NOVELS));
 
 
-        addBook(new Non_Fiction_Books("Java Fundamental", 20001, "Oracle", 15));
-        addBook(new Non_Fiction_Books("Java For Beginers", 20002, "Oracle", 11));
-        addBook(new Non_Fiction_Books("Java Script", 20003, "Oracle", 0));
-        addBook(new Non_Fiction_Books("Advanced Math", 20004, "Conaway", 4));
+        addBook(new Non_Fiction_Books("Java Fundamental", 20001, "Oracle", 15,Categories.SCIENCE));
+        addBook(new Non_Fiction_Books("Java For Beginers", 20002, "Oracle", 11,Categories.SCIENCE));
+        addBook(new Non_Fiction_Books("Java Script", 20003, "Oracle", 0,Categories.SCIENCE));
+        addBook(new Non_Fiction_Books("Advanced Math", 20004, "Conaway", 4,Categories.MATH));
 
 
-        addBook(new Reference_Books("Marriage Catalog", 90001, "City", 6));
-        addBook(new Reference_Books("Reference Books 1", 90002, "Author1", 4));
-        addBook(new Reference_Books("Reference Books 2", 90003, "Author2", 0));
+        addBook(new Reference_Books("Marriage Catalog", 90001, "City", 6,Categories.REFFERANCE));
+        addBook(new Reference_Books("Reference Books 1", 90002, "Author1", 4,Categories.REFFERANCE));
+        addBook(new Reference_Books("Reference Books 2", 90003, "Author2", 0,Categories.REFFERANCE));
 
     }
 
@@ -108,7 +105,7 @@ public class LibraryDATA {
         Set<Integer> set = inventory.keySet();
         System.out.println("Collection of books:");
         for (Integer key : set) {
-            s += "| BookID: " + getInventory().get(key).getBookID() + "| Name: " + getInventory().get(key).getName() + "| Author: " + getInventory().get(key).getAuthor() + " | Available : " + getInventory().get(key).getAmmount() + "\n";
+            s += "| BookID: " + getInventory().get(key).getBookID() + "| Name: " + getInventory().get(key).getName() + "| Author: " + getInventory().get(key).getAuthor() +" | Categories: " +getInventory().get(key).getCategories()+ " | Available : " + getInventory().get(key).getAmmount() + "\n";
         }
         return s;
     }
@@ -480,15 +477,16 @@ public static void createBook() {
 
     switch (type) {
         case 1:
-            Fiction_Books fiction_books = new Fiction_Books(name, author,amount);
+            Categories.
+            Fiction_Books fiction_books = new Fiction_Books(name,author,amount,categories)
             addBook(fiction_books);
             break;
         case 2:
-            Non_Fiction_Books non_fiction_books = new Non_Fiction_Books(name, author,amount);
+            Non_Fiction_Books non_fiction_books = new Non_Fiction_Books(name, author,amount,);
           addBook(non_fiction_books);
             break;
         case 3:
-            Reference_Books reference_books = new Reference_Books(name, author,amount);
+            Reference_Books reference_books = new Reference_Books(name, author,amount,Categories.REFFERANCE);
             addBook(reference_books);
             break;
     }

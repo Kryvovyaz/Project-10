@@ -9,16 +9,17 @@ public abstract class Books  {
     private   String name;
     private   Integer bookID;
     private  String author;
-    private  int ammount=1;
-    private LocalDate pastdue;
+    private  int amount;
+    private LocalDate dueDate;
     private Categories categories;
 
+
     public int getAmmount() {
-        return ammount;
+        return amount;
     }
 
     public void setAmmount(int ammount) {
-        this.ammount = ammount;
+        this.amount = ammount;
     }
 
     public  int getbookID() {
@@ -32,18 +33,25 @@ public abstract class Books  {
     public  void setBookID(int bookID) {
         this.bookID = bookID;
     }
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
 
     public  String getAuthor() {
         return author;
     }
-
-    public LocalDate getPastdue() {
-        return pastdue;
+    public Categories getCategories() {
+        return categories;
     }
 
-    public void setPastdue(LocalDate pastdue) {
-        this.pastdue = pastdue;
+    public Integer getBookID() {
+        return bookID;
     }
+
 
     public  String getName() {
         return name;
@@ -51,21 +59,29 @@ public abstract class Books  {
 
 
 
-    public Books(String name, String author,int ammount) {
+    public Books(String name, String author, int amount,Categories categories) {
         this.name = name;
         this.author = author;
         this.bookID = bookIdGenerator();
-        this.ammount = ammount;
+        this.amount = amount;
         this.categories=categories;
     }
 
-    public Books(String name, int bookID, String author,int ammount) {
+    public Books(String name, Integer bookID, String author, int amount, Categories categories) {
         this.name = name;
         this.bookID = bookID;
         this.author = author;
-        this.ammount = ammount;
-       // this.categories=categories;
-        this.ammount=ammount;
+        this.amount = amount;
+        this.categories=categories;
+    }
+
+    public Books(String name, int bookID, String author, int amount, Categories categories) {
+        this.name = name;
+        this.bookID = bookID;
+        this.author = author;
+        this.amount = amount;
+        this.categories=categories;
+        this.amount=amount;
     }
 //////////////////////  Book ID Genrator ///////////////////////////////
     public  int bookIdGenerator() {
@@ -79,9 +95,7 @@ public abstract class Books  {
 ////////////////////////////////////////////////////////////////////////
 
 
-    public Categories getCategories() {
-        return categories;
-    }
+
 
     @Override
     public String toString(){
@@ -89,9 +103,7 @@ public abstract class Books  {
        return s;
    }
 
-    public Integer getBookID() {
-        return bookID;
-    }
+
 }
 /*Books:
    Each book has a name, a author, a five-digit bookId and a status(checkedIn or not)
