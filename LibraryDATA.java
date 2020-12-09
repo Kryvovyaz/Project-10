@@ -477,12 +477,12 @@ public static void createBook() {
 
     switch (type) {
         case 1:
-            Categories.
-            Fiction_Books fiction_books = new Fiction_Books(name,author,amount,categories)
+
+            Fiction_Books fiction_books = new Fiction_Books(name,author,amount,Categories.EARLY_AGE);
             addBook(fiction_books);
             break;
         case 2:
-            Non_Fiction_Books non_fiction_books = new Non_Fiction_Books(name, author,amount,);
+            Non_Fiction_Books non_fiction_books = new Non_Fiction_Books(name, author,amount,Categories.SCIENCE);
           addBook(non_fiction_books);
             break;
         case 3:
