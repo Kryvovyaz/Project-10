@@ -542,19 +542,6 @@ do {
     public static void main(String[] args)  {
 
 
-        CheckOut(3001);
-
-        UserLookUP(3001);
-
-        checkinBook();
-
-        UserLookUP(3001);
-//        CheckOut(3001);
-//        UserLookUP(3001);
-//        CheckOut(3001);
-//        UserLookUP(3001);
-//        CheckOut(3001);
-//        UserLookUP(3001);
 
     }
 }
