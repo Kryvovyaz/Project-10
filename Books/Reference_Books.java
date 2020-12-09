@@ -10,6 +10,8 @@ public class Reference_Books extends Books {
     public Reference_Books(String name, int bookID, String author, int ammount) {
         super(name, bookID, author, ammount);
     }
+
+
 }
 
 /*Reference Books:

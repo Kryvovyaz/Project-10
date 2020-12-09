@@ -16,7 +16,7 @@ import java.util.Scanner;
         Create a user (teacher, student and/or another librarian)
         Create a book (fiction, non-fiction or reference)
         Give(check out) a book to a user*/
-public class Librarian extends Users {
+public class Librarian extends Users implements Cloneable {
 
     public Librarian(String user_name, String user_lastName, int userID) {
         super(user_name, user_lastName, userID);
@@ -27,73 +27,7 @@ public class Librarian extends Users {
     }
 
 
-    ///////////////////   Creating of a new User  ////////////////////////////////////////////
-    public static void createNewUser() throws RuntimeException {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("What type of user do you want to create: 1-Admin 2-Techer 3- Student");
-
-        String user = scanner.nextLine();
-        System.out.println("User's name");
-        String name = scanner.nextLine();
-        System.out.println("User's last name");
-        String lastname = scanner.nextLine();
-
-        switch (user) {
-            case "1":
-                Librarian librarian = new Librarian(name, lastname);
-                LibraryDATA.addUser(librarian);
-                break;
-
-            case "2":
-                Teacher teacher = new Teacher(name, lastname);
-                LibraryDATA.addUser(teacher);
-                break;
-
-            case "3":
-                Student student = new Student(name, lastname);
-                LibraryDATA.addUser(student);
-                break;
-            default:
-                throw new RuntimeException("You have to enter 1 or 2 or 3 only");
-        }
-    }
 
     /******************************************************************************************************/
-    ///////////////// Creating new Book ////////////////////////////////////////////////////////////
-    public static void createBook() throws RuntimeException {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("What type of book do you have: 1-Fiction Books 2-Non-Fiction Books 3- Reference Books");
-
-        String type = scanner.nextLine();
-
-
-        ///////////////////////////////
-        System.out.println("Enter Book's name");
-        String name = scanner.nextLine();
-        System.out.println("Enter Author");
-        String author = scanner.nextLine();
-        System.out.println("Enter ammount of books");
-        int amount=0;
-       try {
-            amount = Integer.parseInt(scanner.nextLine());
-       }catch (NumberFormatException ignored){}
-
-        switch (type) {
-            case "1":
-                Fiction_Books fiction_books = new Fiction_Books(name, author,amount);
-                LibraryDATA.addBook(fiction_books);
-                break;
-            case "2":
-                Non_Fiction_Books non_fiction_books = new Non_Fiction_Books(name, author,amount);
-                LibraryDATA.addBook(non_fiction_books);
-                break;
-            case "3":
-                Reference_Books reference_books = new Reference_Books(name, author,amount);
-                LibraryDATA.addBook(reference_books);
-                break;
-                    }
-
-    }
-/***********************************************************************************************************************/
 
 }

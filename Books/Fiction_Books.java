@@ -14,6 +14,10 @@ private Categories categories;
     }
 
 
+
+
+
+
     enum Categories{
     WORLD_CLASSICS, NOVELS, LITERATURE, EARLY_AGE, GENERAL
 

@@ -9,7 +9,7 @@ public abstract class Books  {
     private   String name;
     private   Integer bookID;
     private  String author;
-    private  int ammount;
+    private  int ammount=1;
     private LocalDate pastdue;
     private Categories categories;
 
@@ -48,9 +48,8 @@ public abstract class Books  {
     public  String getName() {
         return name;
     }
-    public int getBookID() {
-        return bookID;
-    }
+
+
 
     public Books(String name, String author,int ammount) {
         this.name = name;
@@ -90,6 +89,9 @@ public abstract class Books  {
        return s;
    }
 
+    public Integer getBookID() {
+        return bookID;
+    }
 }
 /*Books:
    Each book has a name, a author, a five-digit bookId and a status(checkedIn or not)

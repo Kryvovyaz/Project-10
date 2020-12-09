@@ -10,7 +10,9 @@ public class Non_Fiction_Books extends Books {
 
     public Non_Fiction_Books(String name, int bookID, String author, int ammount) {
         super(name, bookID, author, ammount);
-    }}
+    }
+
+   }
 
 /*
    Non-Fiction Books:
