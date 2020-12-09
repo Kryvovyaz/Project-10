@@ -8,6 +8,10 @@ import Project10_Vlad.Users.Librarian;
 import Project10_Vlad.Users.Student;
 import Project10_Vlad.Users.Teacher;
 import Project10_Vlad.Users.Users;
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.nio.channels.ScatteringByteChannel;
 import java.util.*;
@@ -63,6 +67,7 @@ public class LibraryDATA {
     ///////////////////////////////  LOOKUP THE USER  ////////////////////////////////
 
     public static void UserLookUP(int userID) {
+
         if (userStatus(userID)) {
             if (usersInventory.get(userID) != null) {
                 if (!usersInventory.get(userID).isEmpty()) {
@@ -70,7 +75,7 @@ public class LibraryDATA {
 
                     Collection<Books> list = usersInventory.get(userID).values();
                     for (Books books : list) {
-                        System.out.println("| BookID: " + books.getBookID() + " | Book Name: " + books.getName() + " | Author: " + books.getAuthor() + " | DueDate: " + "\n");
+                        System.out.println("| BookID: " + books.getBookID() + " | Book Name: " + books.getName() + " | Author: " + books.getAuthor() + " | DueDate: " + books.getDueDate()+"\n");
                     }
 
 
@@ -345,6 +350,7 @@ int id2=0;
 
     /////////////////////////////////   CHEKOUT A BOOK  //////////////////////////////
     public static void CheckOut(int UserId)  {
+ ;
         Scanner scanner = new Scanner(System.in);
         boolean q = true;
         do {
@@ -370,7 +376,9 @@ int id2=0;
                  ((usersID.get(UserId) instanceof Librarian) && (usersInventory.get(UserId).size() <11))) {
 
             if (!(inventory.get(BookID) instanceof Reference_Books)) {
+
                 userList.put(BookID, inventory.get(BookID));
+                userList.get(BookID).setDueDate(dueDate(UserId));
                 inventory.get(BookID).setAmmount(inventory.get(BookID).getAmmount() - 1);
 
             } else System.out.println("Reference books are NOT borrowable");
@@ -468,7 +476,27 @@ public static void createBook() throws RuntimeException {
 
 }
     /***********************************************************************************************************************/
+     ////////////////////////  Due date /////////////////////////////////////////////////
+    public static  LocalDate dueDate(int userId){
+        int howManyDays=0;
+        if(getUsersID().get(userId) instanceof Librarian){
+            howManyDays=30;
+        }
+        if(getUsersID().get(userId) instanceof Teacher){
+            howManyDays=21;
+        }
+        if(getUsersID().get(userId) instanceof Student){
+            howManyDays=14;
+        }
+        LocalDate now = LocalDate.now();
 
+        LocalDate dueDate = now.plusDays(howManyDays);
+       // DateTimeFormatter formater = DateTimeFormatter.ofPattern("MM/dd/uuuu");
+
+
+        return dueDate;
+    }
+   /****************************************************************************************/
     public static void main(String[] args)  {
 
 
