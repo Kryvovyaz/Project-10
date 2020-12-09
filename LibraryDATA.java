@@ -288,39 +288,41 @@ public class LibraryDATA {
     public static void checkinBook() {
         boolean q = true;
         do {
-            System.out.println("Enter UserId returning the book");
+            System.out.println("Enter User'sId returning the book");
 
             Scanner scanner = new Scanner(System.in);
-            int bookId = 0;
-            try {
-                bookId = Integer.parseInt(scanner.nextLine());
-            } catch (NumberFormatException ignored) {
-            }
-            System.out.println("Enter bookId to be ruturned");
-
             int userId = 0;
             try {
                 userId = Integer.parseInt(scanner.nextLine());
             } catch (NumberFormatException ignored) {
             }
-
             if (!userStatus(userId)) {
                 System.out.println("User is not registered");
                 q = false;
-                break;
-            } else if (!inventory.containsKey(bookId)) {
+                break;}
+
+            System.out.println("Enter bookId to be ruturned");
+
+            int bookId = 0;
+            try {
+                bookId = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException ignored) {
+            }
+            if (!inventory.containsKey(bookId)) {
                 System.out.println("Book is not from this library");
-            } else if (((usersInventory.get(userId) == null) || (!usersInventory.get(userId).isEmpty()))) {
+                 break;
+
+            } else if (((usersInventory.get(userId).get(bookId) == null) || (!usersInventory.get(userId).isEmpty()) )){
                 System.out.println("This book is not belong to this user");
                 q = false;
                 break;
 
             } else {
                 usersInventory.get(userId).remove(bookId);
-
+                inventory.get(bookId).setAmmount(inventory.get(bookId).getAmmount() + 1);
                 q = false;
             }
-            //inventory.get(bookId).setAmmount(inventory.get(bookId).getAmmount() + 1);
+
 
         } while (!q);
     }
@@ -330,40 +332,48 @@ public class LibraryDATA {
     /////////////////////////////////   CHEKOUT A BOOK  //////////////////////////////
     public static void CheckOut() throws CloneNotSupportedException {
         Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Please enter borrower's UserID");
-        int UserId = 0;
-        try {
-            UserId = Integer.parseInt(scanner.nextLine());
-        } catch (NumberFormatException ignored) {
-        }
-
-        System.out.println("Please enter BookID");
-        int BookID = 0;
-        try {
-            BookID = Integer.parseInt(scanner.nextLine());
-        } catch (NumberFormatException ignored) {
-        }
-
-        if (inventory.get(BookID).getAmmount() != 0) {
-            HashMap<Integer, Books> userList = usersInventory.get(UserId);
-            if (userList == null) {
-                userList = new HashMap<>();
-                usersInventory.put(UserId, userList);
-            }
+        boolean q = true;
+do {
+    System.out.println("Please enter borrower's UserID");
+    int UserId = 0;
+    try {
+        UserId = Integer.parseInt(scanner.nextLine());
+    } catch (NumberFormatException ignored) {
+    }
+    if (!userStatus(UserId)) {
+        System.out.println("User is not registered");
+        q = false;
+        break;}
 
 
-            if (((usersID.get(UserId) instanceof Teacher) && (usersInventory.get(UserId).size() <= 5)) ||
-                    ((usersID.get(UserId) instanceof Student) && (usersInventory.get(UserId).size() <= 3)) ||
-                    ((usersID.get(UserId) instanceof Librarian) && (usersInventory.get(UserId).size() <= 10))) {
+    System.out.println("Please enter BookID");
+    int BookID = 0;
+    try {
+        BookID = Integer.parseInt(scanner.nextLine());
+    } catch (NumberFormatException ignored) {
+    }
+    if (!inventory.containsKey(BookID)) {
+        System.out.println("Can't find a book");
+        break;}
 
-                if (!(inventory.get(BookID) instanceof Reference_Books)) {
-                    userList.put(BookID, inventory.get(BookID));
-                    inventory.get(BookID).setAmmount(inventory.get(BookID).getAmmount() - 1);
+
+    if (inventory.get(BookID).getAmmount() != 0) {
+        HashMap<Integer, Books> userList = usersInventory.get(UserId);
+        if (userList == null) {
+            userList = new HashMap<>();
+            usersInventory.put(UserId, userList);
+        }else if (((usersID.get(UserId) instanceof Teacher) && (usersInventory.get(UserId).size() <= 5)) ||
+                 ((usersID.get(UserId) instanceof Student) && (usersInventory.get(UserId).size() <= 3)) ||
+                 ((usersID.get(UserId) instanceof Librarian) && (usersInventory.get(UserId).size() <= 10))) {
+
+            if (!(inventory.get(BookID) instanceof Reference_Books)) {
+                userList.put(BookID, inventory.get(BookID));
+                inventory.get(BookID).setAmmount(inventory.get(BookID).getAmmount() - 1);
 
             } else System.out.println("Reference books are NOT borrowable");
         } else System.out.println("You exceeded your limit");
-    }else System.out.println("Labrary does not have this book at this time.Choose another book.");
+    } else System.out.println("Labrary does not have this book at this time.Choose another book.");
+}while (!q);
 }
 
 
@@ -498,9 +508,7 @@ public class LibraryDATA {
 public static void createBook() throws RuntimeException {
     Scanner scanner = new Scanner(System.in);
     System.out.println("What type of book do you have: 1-Fiction Books 2-Non-Fiction Books 3- Reference Books");
-
-
-    int type=0;
+    int  type=0;
     do{
         try{
             type = Integer.parseInt(scanner.nextLine());}
@@ -509,29 +517,27 @@ public static void createBook() throws RuntimeException {
         }
     }while (!(type ==1||type==2||type==3));
 
-    ///////////////////////////////
+
     System.out.println("Enter Book's name");
     String name = scanner.nextLine();
     System.out.println("Enter Author");
     String author = scanner.nextLine();
     System.out.println("Enter ammount of books");
-    int amount=0;
-    try {
-        amount = Integer.parseInt(scanner.nextLine());
-    }catch (NumberFormatException ignored){}
+
+           int amount = Integer.parseInt(scanner.nextLine());
 
     switch (type) {
         case 1:
             Fiction_Books fiction_books = new Fiction_Books(name, author,amount);
-            LibraryDATA.addBook(fiction_books);
+            addBook(fiction_books);
             break;
         case 2:
             Non_Fiction_Books non_fiction_books = new Non_Fiction_Books(name, author,amount);
-            LibraryDATA.addBook(non_fiction_books);
+          addBook(non_fiction_books);
             break;
         case 3:
             Reference_Books reference_books = new Reference_Books(name, author,amount);
-            LibraryDATA.addBook(reference_books);
+            addBook(reference_books);
             break;
     }
 
@@ -539,8 +545,6 @@ public static void createBook() throws RuntimeException {
     /***********************************************************************************************************************/
 
     public static void main(String[] args) {
-
-        System.out.println(printinventory());
-        System.out.println(printUsers());
+        System.out.println(usersInventory.keySet());
     }
 }
