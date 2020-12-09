@@ -479,14 +479,13 @@ do {
    }while (author.length()==0);
     System.out.println("Enter ammount of books");
     int amount=0;
-    do{
+
         try{
             amount= Integer.parseInt(scanner.nextLine());
-        break;}
+      }
         catch (NumberFormatException ignored) {
-            System.out.println("You can only select 1,  2 or 3 ");
-        }
-    }while (1>0);
+              }
+
 
     switch (type) {
         case 1:
