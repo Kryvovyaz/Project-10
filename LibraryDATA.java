@@ -170,11 +170,11 @@ public class LibraryDATA {
 
     /***********************************************************************************/
 
-    static private int id2;
+   // static private int id2;
     /////////////////////  Users Access   ///////////////////////////////////////////
 
     private static void Usersaccess(Scanner scanner) {
-
+int id2=0;
         boolean access = false;
         while (!access) {
             System.out.println("Enter your IDNumber");
@@ -206,7 +206,7 @@ public class LibraryDATA {
                         checkinBook();
                         break;
                     case "4":
-                        CheckOut();
+                        CheckOut(id2);
                         break;
                     case "c":
                 }
@@ -266,15 +266,24 @@ public class LibraryDATA {
                         break;
                     case "5":
                         createBook();
-                        System.out.println("New book stored");
+
                         break;
                     case "6":
                         checkinBook();
                         break;
                     case "7":
-                        CheckOut();
+                           System.out.println("Please enter borrower's UserID");
+                            int UserId = 0;
+                            try {
+                                UserId = Integer.parseInt(scanner.nextLine());
+                            } catch (NumberFormatException ignored) {
+                            }
+                            if (!userStatus(UserId)) {
+                                System.out.println("User is not registered");
+                                 break;}
+                        CheckOut(UserId);
                         break;
-                    case "c":
+                    case "c":break;
                 }
             } while (!answer1.equals("c"));
         } catch (NumberFormatException | CloneNotSupportedException ignored) {
@@ -301,7 +310,7 @@ public class LibraryDATA {
                 q = false;
                 break;}
 
-            System.out.println("Enter bookId to be ruturned");
+            System.out.println("Enter bookId to be returned");
 
             int bookId = 0;
             try {
@@ -312,7 +321,7 @@ public class LibraryDATA {
                 System.out.println("Book is not from this library");
                  break;
 
-            } else if (((usersInventory.get(userId).get(bookId) == null) || (!usersInventory.get(userId).isEmpty()) )){
+            } else if (((usersInventory.get(userId)==null) || (!usersInventory.get(userId).isEmpty()) )){
                 System.out.println("This book is not belong to this user");
                 q = false;
                 break;
@@ -330,21 +339,10 @@ public class LibraryDATA {
     /******************************************************************************************/
 
     /////////////////////////////////   CHEKOUT A BOOK  //////////////////////////////
-    public static void CheckOut() throws CloneNotSupportedException {
+    public static void CheckOut(int UserId) throws CloneNotSupportedException {
         Scanner scanner = new Scanner(System.in);
         boolean q = true;
-do {
-    System.out.println("Please enter borrower's UserID");
-    int UserId = 0;
-    try {
-        UserId = Integer.parseInt(scanner.nextLine());
-    } catch (NumberFormatException ignored) {
-    }
-    if (!userStatus(UserId)) {
-        System.out.println("User is not registered");
-        q = false;
-        break;}
-
+        do {
 
     System.out.println("Please enter BookID");
     int BookID = 0;
@@ -362,9 +360,9 @@ do {
         if (userList == null) {
             userList = new HashMap<>();
             usersInventory.put(UserId, userList);
-        }else if (((usersID.get(UserId) instanceof Teacher) && (usersInventory.get(UserId).size() <= 5)) ||
-                 ((usersID.get(UserId) instanceof Student) && (usersInventory.get(UserId).size() <= 3)) ||
-                 ((usersID.get(UserId) instanceof Librarian) && (usersInventory.get(UserId).size() <= 10))) {
+        }else if (((usersID.get(UserId) instanceof Teacher) && (usersInventory.get(UserId).size() <6)) ||
+                 ((usersID.get(UserId) instanceof Student) && (usersInventory.get(UserId).size() <4)) ||
+                 ((usersID.get(UserId) instanceof Librarian) && (usersInventory.get(UserId).size() <11))) {
 
             if (!(inventory.get(BookID) instanceof Reference_Books)) {
                 userList.put(BookID, inventory.get(BookID));
@@ -372,88 +370,9 @@ do {
 
             } else System.out.println("Reference books are NOT borrowable");
         } else System.out.println("You exceeded your limit");
-    } else System.out.println("Labrary does not have this book at this time.Choose another book.");
+    } else System.out.println("Library does not have this book at this time.Choose another book.");
 }while (!q);
 }
-
-
-//       System.out.println("Please enter borrower's UserID");
-//
-//      //
-//       try{
-//       int UserId=0;
-//       try{
-//           UserId = Integer.parseInt(scanner.nextLine());
-//
-//       }catch (NumberFormatException ignored){}
-//
-//       System.out.println("Please enter BookID");
-//       int BookID=0;
-//       try {
-//           BookID= Integer.parseInt(scanner.nextLine());
-//       }catch (NumberFormatException ignored){}
-//
-//
-//       if (inventory.get(BookID).getAmmount()!=0) {
-////check if registered user
-//           if (userStatus(UserId)) {
-//
-//                   ArrayList<Books> userList = usersInventory.get(UserId);
-//                   if (userList == null) {
-//                       userList = new ArrayList<>();
-//                       usersInventory.put(UserId, userList);
-//                              }
-//                   //check if user has a book with BookId number
-//                if (usersInventory.get(UserId).contains(inventory.get(BookID))) {
-//
-//                   System.out.println("User already has this book.Only one book of a kind is allowed");
-//               }else
-//                       usersInventory.get(UserId).add(inventory.get(BookID));
-//
-//                  inventory.get(BookID).setAmmount(inventory.get(BookID).getAmmount() - 1);
-//               }
-//               // TODO : set ammount of books to 1 usersInventory.get(BookID).indexOf()
-//
-//            else System.out.println("Not registered user.See Admin for Help");
-//
-//       }else {System.out.println("Library does not have this book at this time.Choose another book.");}
-//
-//
-//
-//       }  catch(NullPointerException e){
-//           System.out.println("incorect input");
-//       }
-
-
-
-
-
-
-
-
-//           //TODO:
-//           if(!((usersID.get(usersID) instanceof Teacher)&&(usersInventory.get(usersID).size()<=5))||
-//               ((usersID.get(usersID) instanceof Student)&&(usersInventory.get(usersID).size()<=3)) ||
-//               ((usersID.get(usersID) instanceof Librarian)&&(usersInventory.get(usersID).size()<=10))) {
-//
-//               if (usersID.containsKey(usersID)) {
-//                   System.out.println("User is not registered");
-//                   if ((!(inventory.get(BookID) instanceof Reference_Books))) {
-//
-//                       ArrayList<Books> userList = usersInventory.get(UserId);
-//                       if (userList == null) {
-//                           userList = new ArrayList<>();
-//                           usersInventory.put(UserId, userList);
-//                       }
-//                       userList.add(inventory.get(BookID));
-//
-//                       inventory.get(BookID).setAmmount(inventory.get(BookID).getAmmount() - 1);
-//
-//                   } else System.out.println("Reference books are NOT borrowable");
-//               } else System.out.println("You exceeded your limit");
-//           }
-//       }else System.out.println("Library does not have this book at this time.Choose another book.");
-
 
 
     /********************************************************************************/
@@ -540,11 +459,21 @@ public static void createBook() throws RuntimeException {
             addBook(reference_books);
             break;
     }
+    System.out.println("New book stored");
 
 }
     /***********************************************************************************************************************/
 
-    public static void main(String[] args) {
-        System.out.println(usersInventory.keySet());
+    public static void main(String[] args) throws CloneNotSupportedException {
+checkinBook();
+//        CheckOut(3001);
+//        UserLookUP(3001);
+//        CheckOut(3001);
+//        UserLookUP(3001);
+//        CheckOut(3001);
+//        UserLookUP(3001);
+//        CheckOut(3001);
+//        UserLookUP(3001);
+
     }
 }
