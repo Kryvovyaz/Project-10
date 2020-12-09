@@ -77,11 +77,11 @@ public class LibraryDATA {
                 } else {
                     System.out.println("NO books has been borrowed by this user");
                 }
-            } else {
-                System.out.println("Not registered user");
+            } else {System.out.println("NO books has been borrowed by this user");
+
             }
 
-        }
+        }else System.out.println("Not registered user");
     }
     //manual input for test
         public static void addBook(Books book) {
