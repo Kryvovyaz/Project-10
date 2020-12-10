@@ -458,13 +458,13 @@ public static void createBook() {
     Scanner scanner = new Scanner(System.in);
     System.out.println("What type of book do you have: 1-Fiction Books 2-Non-Fiction Books 3- Reference Books");
     int  type=0;
-    do{
+    while (!(type ==1||type==2||type==3)){
         try{
             type = Integer.parseInt(scanner.nextLine());}
         catch (NumberFormatException ignored) {
             System.out.println("You can only select 1,  2 or 3 ");
         }
-    }while (!(type ==1||type==2||type==3));
+    }
 String name="";
 do {
     System.out.println("Enter Book's name");
