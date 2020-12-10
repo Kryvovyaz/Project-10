@@ -540,7 +540,7 @@ do {
                 non_fiction_books = new Non_Fiction_Books(name,author,amount,Categories.SOCIAL);
             }
             else if (c==4){
-                fiction_books = new Fiction_Books(name,author,amount,Categories.HISTORICAL);}
+                non_fiction_books  = new Non_Fiction_Books(name,author,amount,Categories.HISTORICAL);}
             else {
                 System.out.println("Incorect input");
                 break;
