@@ -512,6 +512,7 @@ do {
             }
             else {
                 System.out.println("Incorect input");
+                break;
             }
             addBook(fiction_books);
             System.out.println("New book Added to the library.");
@@ -542,6 +543,7 @@ do {
                 fiction_books = new Fiction_Books(name,author,amount,Categories.HISTORICAL);}
             else {
                 System.out.println("Incorect input");
+                break;
             }
 
 
