@@ -403,8 +403,7 @@ int id2=0;
             }
 
         } else{ System.out.println("Not registered user");}
-            System.out.println("Thank you for using this Library.Dont forget to return this book by: "+ dueDate(UserId).format(formater).toString() );
-    }  while (!q) ;}
+       }  while (!q) ;}
     /********************************************************************************/
     //////////////////////////////// check if active user  //////////////////////////////
     public static boolean userStatus(int Userid){
@@ -486,23 +485,77 @@ do {
         catch (NumberFormatException ignored) {
               }
 
-
     switch (type) {
         case 1:
+            System.out.println("Please choose category:"+"\n"+"| 1: WORLD_CLASSICS | 2: NOVELS | 3: LITERATURE | 4: EARLY_AGE | 5: GENERAL |");
+            int b=0;
 
-            Fiction_Books fiction_books = new Fiction_Books(name,author,amount,Categories.EARLY_AGE);
+            try{
+                b= Integer.parseInt(scanner.nextLine());
+            }
+            catch (NumberFormatException ignored) {
+            }
+            Fiction_Books fiction_books = null;
+            if(b == 1){
+                 fiction_books = new Fiction_Books(name,author,amount,Categories.WORLD_CLASSICS);
+            }else if (b==2){
+               fiction_books = new Fiction_Books(name,author,amount,Categories.NOVELS);
+
+            }else if (b==3){
+                 fiction_books = new Fiction_Books(name,author,amount,Categories.LITERATURE);
+            }
+            else if (b==4){
+                 fiction_books = new Fiction_Books(name,author,amount,Categories.LITERATURE);
+
+            }else if (b==5){
+                fiction_books = new Fiction_Books(name,author,amount,Categories.GENERAL);
+            }
+            else {
+                System.out.println("Incorect input");
+            }
             addBook(fiction_books);
+            System.out.println("New book Added to the library.");
             break;
         case 2:
-            Non_Fiction_Books non_fiction_books = new Non_Fiction_Books(name, author,amount,Categories.SCIENCE);
+
+            System.out.println("Please choose category:"+"\n"+"| 1: WORLD_CLASSICS | 2: NOVELS | 3: LITERATURE | 4: EARLY_AGE | 5: GENERAL |");
+            int c=0;
+
+            try{
+                c= Integer.parseInt(scanner.nextLine());
+            }
+            catch (NumberFormatException ignored) {
+            }
+            Non_Fiction_Books non_fiction_books = null;
+
+            System.out.println("Please choose category:"+"\n"+"| 1:MATH | 2: SCIENCE | 3: SOCIAL | 4: HISTORICAL | ");
+
+            if(c == 1){
+                fiction_books = new Fiction_Books(name,author,amount,Categories.MATH);
+            }else if (c==2){
+                fiction_books = new Fiction_Books(name,author,amount,Categories.SCIENCE);
+
+            }else if (c==3){
+                fiction_books = new Fiction_Books(name,author,amount,Categories.SOCIAL);
+            }
+            else if (c==4){
+                fiction_books = new Fiction_Books(name,author,amount,Categories.HISTORICAL);}
+            else {
+                System.out.println("Incorect input");
+            }
+
+
+
           addBook(non_fiction_books);
+                System.out.println("New book Added to the library.");
             break;
+
         case 3:
             Reference_Books reference_books = new Reference_Books(name, author,amount,Categories.REFFERANCE);
             addBook(reference_books);
+            System.out.println("New book Added to the library.");
             break;
     }
-    System.out.println("New book stored");
 
 }
     /***********************************************************************************************************************/
