@@ -519,7 +519,8 @@ do {
             break;
         case 2:
 
-            System.out.println("Please choose category:"+"\n"+"| 1: WORLD_CLASSICS | 2: NOVELS | 3: LITERATURE | 4: EARLY_AGE | 5: GENERAL |");
+            System.out.println("Please choose category:"+"\n"+"| 1:MATH | 2: SCIENCE | 3: SOCIAL | 4: HISTORICAL | ");
+
             int c=0;
 
             try{
@@ -529,7 +530,6 @@ do {
             }
             Non_Fiction_Books non_fiction_books = null;
 
-            System.out.println("Please choose category:"+"\n"+"| 1:MATH | 2: SCIENCE | 3: SOCIAL | 4: HISTORICAL | ");
 
             if(c == 1){
                 fiction_books = new Fiction_Books(name,author,amount,Categories.MATH);
