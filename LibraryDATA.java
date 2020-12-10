@@ -532,12 +532,12 @@ do {
 
 
             if(c == 1){
-                fiction_books = new Fiction_Books(name,author,amount,Categories.MATH);
+                non_fiction_books = new Non_Fiction_Books( name,author,amount,Categories.MATH);
             }else if (c==2){
-                fiction_books = new Fiction_Books(name,author,amount,Categories.SCIENCE);
+                non_fiction_books = new Non_Fiction_Books(name,author,amount,Categories.SCIENCE);
 
             }else if (c==3){
-                fiction_books = new Fiction_Books(name,author,amount,Categories.SOCIAL);
+                non_fiction_books = new Non_Fiction_Books(name,author,amount,Categories.SOCIAL);
             }
             else if (c==4){
                 fiction_books = new Fiction_Books(name,author,amount,Categories.HISTORICAL);}
@@ -545,8 +545,6 @@ do {
                 System.out.println("Incorect input");
                 break;
             }
-
-
 
           addBook(non_fiction_books);
                 System.out.println("New book Added to the library.");
