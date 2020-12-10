@@ -582,17 +582,6 @@ do {
         return dueDate;
     }
 
-//////////////////////////////  Serch by categoties ////////////////////////////
-    public static HashMap<Integer,Categories> CategoriesSearch(){
-        HashMap<Integer,Categories>map = new HashMap<>();
-
-
-
-
-        return map;
-    }
-
-
    /****************************************************************************************/
     public static void main(String[] args)  {
 
