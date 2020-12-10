@@ -55,9 +55,9 @@ public class LibraryDATA {
         addBook(new Non_Fiction_Books("Advanced Math", 20004, "Conaway", 4,Categories.MATH));
 
 
-        addBook(new Reference_Books("Marriage Catalog", 90001, "City", 6,Categories.REFFERANCE));
-        addBook(new Reference_Books("Reference Books 1", 90002, "Author1", 4,Categories.REFFERANCE));
-        addBook(new Reference_Books("Reference Books 2", 90003, "Author2", 0,Categories.REFFERANCE));
+        addBook(new Reference_Books("Marriage Catalog", 90001, "City", 6,Categories.REFERANCE));
+        addBook(new Reference_Books("Reference Books 1", 90002, "Author1", 4,Categories.REFERANCE));
+        addBook(new Reference_Books("Reference Books 2", 90003, "Author2", 0,Categories.REFERANCE));
 
     }
 
@@ -558,7 +558,7 @@ do {
             break;
 
         case 3:
-            Reference_Books reference_books = new Reference_Books(name, author,amount,Categories.REFFERANCE);
+            Reference_Books reference_books = new Reference_Books(name, author,amount,Categories.REFERANCE);
             addBook(reference_books);
             System.out.println("New book Added to the library.");
             break;
