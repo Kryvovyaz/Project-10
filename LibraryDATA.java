@@ -505,7 +505,7 @@ do {
                  fiction_books = new Fiction_Books(name,author,amount,Categories.LITERATURE);
             }
             else if (b==4){
-                 fiction_books = new Fiction_Books(name,author,amount,Categories.LITERATURE);
+                 fiction_books = new Fiction_Books(name,author,amount,Categories.EARLY_AGE);
 
             }else if (b==5){
                 fiction_books = new Fiction_Books(name,author,amount,Categories.GENERAL);
