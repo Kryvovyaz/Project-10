@@ -369,6 +369,7 @@ int id2=0;
                 if (inventory.containsKey(BookID)) {
                     if (inventory.get(BookID).getAmmount() != 0) {
 
+
 //
                         if (!(inventory.get(BookID) instanceof Reference_Books)) {
                             if (usersInventory.get(UserId)== null) {
@@ -380,15 +381,21 @@ int id2=0;
 
                                     ((usersID.get(UserId) instanceof Student) && (usersInventory.get(UserId).size() <3)) ||
                                     ((usersID.get(UserId) instanceof Librarian) && (usersInventory.get(UserId).size() < 10))) {
+                                if(!usersInventory.get(UserId).containsKey(BookID)){
 
                                 usersInventory.get(UserId).put(BookID, inventory.get(BookID));
                                 usersInventory.get(UserId).get(BookID).setDueDate(dueDate(UserId));
                                inventory.get(BookID).setAmmount(inventory.get(BookID).getAmmount() - 1);
                                 System.out.println("Thank you for using this Library.Dont forget to return this book by: "+ dueDate(UserId).format(formater).toString() );
+                                }else {
+                            System.out.println("You alredy have this book.Only one book of a kind is allowed.");
+                            break;
+                        }
                             }else {
                             System.out.println("You can't exceed you limit.");
                             break;
                         }
+//
 
                     } else {
                             System.out.println("Reference books are NOT borrowable.");
@@ -483,7 +490,7 @@ do {
             amount= Integer.parseInt(scanner.nextLine());
       }
         catch (NumberFormatException ignored) {
-              }
+                        }
 
     switch (type) {
         case 1:
